@@ -4,29 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لعبة أسئلة JavaScript</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap">
+    
+    <!-- إضافة Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <div class="container">
-        <div id="quiz-container">
-            <h1>لعبة أسئلة JavaScript</h1>
+<body class="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 min-h-screen flex justify-center items-center">
+    <div class="container w-full p-5">
+        <div id="quiz-container" class="w-11/12 max-w-lg mx-auto p-8 bg-white bg-opacity-95 rounded-lg shadow-lg">
+            <h1 class="text-2xl text-center mb-6 text-gray-800">لعبة أسئلة JavaScript</h1>
             
-            <div class="game-info">
-                <div id="timer" class="timer">الوقت المتبقي: 30 ثواني</div>
-                <div id="score" class="score">النقاط: 0</div>
+            <div id="welcome-screen" class="text-center">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">مرحباً بك في لعبة JavaScript التعليمية!</h1>
+                <div class="mb-8 text-gray-700 leading-relaxed">
+                    <p class="mb-4">هذه اللعبة ستساعدك في تعلم JavaScript بطريقة ممتعة وتفاعلية.</p>
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h2 class="text-xl font-bold mb-3 text-blue-800">كيفية اللعب:</h2>
+                        <ul class="text-right list-disc list-inside space-y-2 text-blue-700">
+                            <li>اختر مستوى الصعوبة المناسب لك</li>
+                            <li>لديك 30 ثانية للإجابة على كل سؤال</li>
+                            <li>كل إجابة صحيحة تمنحك نقاطاً</li>
+                            <li>حاول تحقيق أعلى النقاط وفتح الإنجازات</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="show-levels-btn" class="btn py-3 px-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg">
+                    ابدأ اللعب
+                </button>
             </div>
 
-            <div class="progress-container">
-                <div id="progress" class="progress"></div>
+            <div id="game-info" class="game-info flex justify-between mb-6 hidden">
+                <div id="score" class="score text-lg text-gray-800 font-bold">النقاط: 0</div>
             </div>
 
-            <div id="question" class="question">...</div>
-            <div id="answers" class="answers"></div>
+            <div class="progress-container w-full h-2 bg-gray-200 rounded mb-6 overflow-hidden">
+                <div id="progress" class="progress h-full bg-green-500 transition-all duration-300 text-center text-xs text-white leading-none"></div>
+            </div>
 
-            <div class="levels">
-                <button class="level-btn" data-level="easy">سهل</button>
-                <button class="level-btn" data-level="medium">متوسط</button>
-                <button class="level-btn" data-level="hard">صعب</button>
+            <div id="question" class="question text-lg text-gray-800 mb-6 text-center leading-relaxed">...</div>
+            <div id="answers" class="answers flex flex-col gap-2 mb-6"></div>
+            <button id="next-btn" class="btn py-2 px-4 bg-blue-500 text-white rounded hidden mx-auto hover:bg-blue-600 transition-all duration-300">السؤال التالي</button>
+
+            <div id="levels" class="levels flex gap-2 justify-center mt-4 hidden">
+                <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-green-500 text-white" data-level="easy">سهل</button>
+                <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-yellow-500 text-white" data-level="medium">متوسط</button>
+                <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-red-500 text-white" data-level="hard">صعب</button>
             </div>
         </div>
     </div>

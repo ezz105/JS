@@ -1,0 +1,107 @@
+ [
+    // المستوى السهل - أساسيات JavaScript
+    {
+        question: "ما هي دالة الـ 'console.log()' في JavaScript؟",
+        answers: ["طباعة نص في المتصفح", "طباعة نص في الكونسول", "إنشاء متغير"],
+        correct: 1,
+        difficulty: "easy"
+    },
+    {
+        question: "كيف تُعلن عن متغير ثابت (لا يتغير قيمته)؟",
+        answers: ["var", "let", "const"],
+        correct: 2,
+        difficulty: "easy"
+    },
+    {
+        question: "كيف تكتب تعليق على سطر واحد في JavaScript؟",
+        answers: ["/* تعليق */", "// تعليق", "<!-- تعليق -->"],
+        correct: 1,
+        difficulty: "easy"
+    },
+    {
+        question: "أي من التالي يُعتبر اسم صحيح لمتغير في JavaScript؟",
+        answers: ["1variable", "$price", "my-var"],
+        correct: 1,
+        difficulty: "easy"
+    },
+    // المستوى المتوسط - المفاهيم المتقدمة
+    {
+        question: "ما هو الفرق بين == و === في JavaScript؟",
+        answers: ["لا يوجد فرق", "=== يقارن القيمة والنوع", "== أكثر أماناً"],
+        correct: 1,
+        difficulty: "medium"
+    },
+    {
+        question: "ما هو الناتج من العملية '2' + 2 في JavaScript؟",
+        answers: ["4", "'22'", "error"],
+        correct: 1,
+        difficulty: "medium"
+    },
+    {
+        question: "ماذا يُرجع typeof null؟",
+        answers: ["null", "undefined", "object"],
+        correct: 2,
+        difficulty: "medium"
+    },
+    {
+        question: "كيف تعمل خاصية hoisting في JavaScript؟",
+        answers: [
+            "رفع تعريفات المتغيرات والدوال لأعلى النطاق",
+            "رفع قيم المتغيرات فقط",
+            "رفع استدعاءات الدوال فقط"
+        ],
+        correct: 0,
+        difficulty: "medium"
+    },
+    // المستوى الصعب - مواضيع متقدمة
+    {
+        question: "ما هو الـ Closure في JavaScript؟",
+        answers: [
+            "دالة تغلق المتصفح",
+            "دالة داخلية تحتفظ بمتغيرات الدالة الخارجية",
+            "دالة تغلق الاتصال بقاعدة البيانات"
+        ],
+        correct: 1,
+        difficulty: "hard"
+    },
+    {
+        question: "ما هو الـ Promise في JavaScript؟",
+        answers: [
+            "كائن يمثل قيمة قد تكون غير متوفرة الآن",
+            "وعد بتنفيذ الكود بشكل صحيح",
+            "دالة تعيد قيمة فورية"
+        ],
+        correct: 0,
+        difficulty: "hard"
+    },
+    {
+        question: "ما هو الـ Event Loop في JavaScript؟",
+        answers: [
+            "حلقة تكرارية عادية",
+            "آلية لتنفيذ العمليات المتزامنة",
+            "نمط تصميم للأحداث"
+        ],
+        correct: 1,
+        difficulty: "hard"
+    },
+    {
+        question: "ما هو الفرق بين map و forEach؟",
+        answers: [
+            "map تعيد مصفوفة جديدة، forEach لا تعيد شيئاً",
+            "forEach أسرع دائماً",
+            "لا يوجد فرق في الاستخدام"
+        ],
+        correct: 0,
+        difficulty: "hard"
+    },
+    {
+        question: "ما هو async/await في JavaScript؟",
+        answers: [
+            "طريقة للتعامل مع العمليات غير المتزامنة",
+            "دوال عادية",
+            "طريقة لإيقاف تنفيذ البرنامج"
+        ],
+        correct: 0,
+        difficulty: "hard"
+    }
+];
