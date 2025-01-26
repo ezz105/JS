@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة أسئلة JavaScript</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="quiz-container">
+            <h1>لعبة أسئلة JavaScript</h1>
+            
+            <div class="game-info">
+                <div id="timer" class="timer">الوقت المتبقي: 30 ثواني</div>
+                <div id="score" class="score">النقاط: 0</div>
+            </div>
+
+            <div class="progress-container">
+                <div id="progress" class="progress"></div>
+            </div>
+
+            <div id="question" class="question">...</div>
+            <div id="answers" class="answers"></div>
+
+            <div class="levels">
+                <button class="level-btn" data-level="easy">سهل</button>
+                <button class="level-btn" data-level="medium">متوسط</button>
+                <button class="level-btn" data-level="hard">صعب</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
