@@ -93,228 +93,527 @@ const achievements = {
     }
 };
 
+// ===================== تعريف الفئات =====================
+const CATEGORIES = {
+    BASICS: "الأساسيات",
+    FUNCTIONS: "الدوال",
+    ARRAYS: "المصفوفات",
+    OBJECTS: "الكائنات",
+    DOM: "DOM",
+    ASYNC: "البرمجة غير المتزامنة",
+    ES6: "ES6+"
+};
+
 // ===================== الأسئلة =====================
 const questions = [
-    // المستوى السهل - أساسيات JavaScript
+    // فئة الأساسيات - سهل
     {
         question: "ما هي دالة الـ 'console.log()' في JavaScript؟",
         answers: ["طباعة نص في المتصفح", "طباعة نص في الكونسول", "إنشاء متغير"],
         correct: 1,
-        difficulty: "easy"
+        difficulty: "easy",
+        category: CATEGORIES.BASICS,
+        explanation: "دالة console.log() هي أداة أساسية للتصحيح في JavaScript، تستخدم لطباعة القيم في وحدة تحكم المتصفح.",
+        codeExample: `// مثال على استخدام console.log
+let name = "أحمد";
+console.log("مرحباً " + name);`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/API/Console/log"
     },
     {
-        question: "كيف تُعلن عن متغير ثابت (لا يتغير قيمته)؟",
-        answers: ["var", "let", "const"],
-        correct: 2,
-        difficulty: "easy"
-    },
-    {
-        question: "كيف تكتب تعليق على سطر واحد في JavaScript؟",
-        answers: ["/* تعليق */", "// تعليق", "<!-- تعليق -->"],
-        correct: 1,
-        difficulty: "easy"
-    },
-    {
-        question: "أي من التالي يُعتبر اسم صحيح لمتغير في JavaScript؟",
-        answers: ["1variable", "$price", "my-var"],
-        correct: 1,
-        difficulty: "easy"
-    },
-    // المستوى المتوسط - المفاهيم المتقدمة
-    {
-        question: "ما هو الفرق بين == و === في JavaScript؟",
-        answers: ["لا يوجد فرق", "=== يقارن القيمة والنوع", "== أكثر أماناً"],
-        correct: 1,
-        difficulty: "medium"
-    },
-    {
-        question: "ما هو الناتج من العملية '2' + 2 في JavaScript؟",
-        answers: ["4", "'22'", "error"],
-        correct: 1,
-        difficulty: "medium"
-    },
-    {
-        question: "ماذا يُرجع typeof null؟",
-        answers: ["null", "undefined", "object"],
-        correct: 2,
-        difficulty: "medium"
-    },
-    {
-        question: "كيف تعمل خاصية hoisting في JavaScript؟",
+        question: "ما هو الفرق بين let و var؟",
         answers: [
-            "رفع تعريفات المتغيرات والدوال لأعلى النطاق",
-            "رفع قيم المتغيرات فقط",
-            "رفع استدعاءات الدوال فقط"
-        ],
-        correct: 0,
-        difficulty: "medium"
-    },
-    // المستوى الصعب - مواضيع متقدمة
-    {
-        question: "ما هو الـ Closure في JavaScript؟",
-        answers: [
-            "دالة تغلق المتصفح",
-            "دالة داخلية تحتفظ بمتغيرات الدالة الخارجية",
-            "دالة تغلق الاتصال بقاعدة البيانات"
+            "let يمكن إعادة تعريفه، var لا يمكن",
+            "let له نطاق block scope، var له function scope",
+            "var أحدث من let"
         ],
         correct: 1,
-        difficulty: "hard"
-    },
-    {
-        question: "ما هو الـ Promise في JavaScript؟",
-        answers: [
-            "كائن يمثل قيمة قد تكون غير متوفرة الآن",
-            "وعد بتنفيذ الكود بشكل صحيح",
-            "دالة تعيد قيمة فورية"
-        ],
-        correct: 0,
-        difficulty: "hard"
-    },
-    {
-        question: "ما هو الـ Event Loop في JavaScript؟",
-        answers: [
-            "حلقة تكرارية عادية",
-            "آلية لتنفيذ العمليات المتزامنة",
-            "نمط تصميم للأحداث"
-        ],
-        correct: 1,
-        difficulty: "hard"
-    },
-    {
-        question: "ما هو الفرق بين map و forEach؟",
-        answers: [
-            "map تعيد مصفوفة جديدة، forEach لا تعيد شيئاً",
-            "forEach أسرع دائماً",
-            "لا يوجد فرق في الاستخدام"
-        ],
-        correct: 0,
-        difficulty: "hard"
-    },
-    {
-        question: "ما هو async/await في JavaScript؟",
-        answers: [
-            "طريقة للتعامل مع العمليات غير المتزامنة",
-            "دوال عادية",
-            "طريقة لإيقاف تنفيذ البرنامج"
-        ],
-        correct: 0,
-        difficulty: "hard"
-    },
-    // المستوى المتقدم - مواضيع متقدمة
-{
-    question: "ما هو الفرق بين synchronous و asynchronous في JavaScript؟",
-    answers: [
-        "synchronous ينفذ العمليات بالتتابع، asynchronous ينفذها بشكل غير متزامن",
-        "asynchronous ينفذ العمليات بالتتابع، synchronous ينفذها بشكل غير متزامن",
-        "لا يوجد فرق بينهما"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الفرق بين setTimeout و setInterval؟",
-    answers: [
-        "setTimeout ينفذ دالة مرة واحدة بعد تأخير زمني، setInterval ينفذها بشكل متكرر",
-        "setInterval ينفذ دالة مرة واحدة بعد تأخير زمني، setTimeout ينفذها بشكل متكرر",
-        "كلاهما ينفذان الدالة بشكل متكرر"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الفرق بين call و apply و bind في JavaScript؟",
-    answers: [
-        "call و apply تستخدمان لاستدعاء الدالة مع تحديد this، بينما bind تُرجع دالة جديدة",
-        "apply و bind تستخدمان لاستدعاء الدالة مع تحديد this، بينما call تُرجع دالة جديدة",
-        "call و bind تستخدمان لاستدعاء الدالة مع تحديد this، بينما apply تُرجع دالة جديدة"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الفرق بين prototype و __proto__ في JavaScript؟",
-    answers: [
-        "__proto__ هو خاصية تشير إلى prototype للكائن، بينما prototype هو خاصية خاصة بالدوال",
-        "prototype هو خاصية تشير إلى __proto__ للكائن، بينما __proto__ هو خاصية خاصة بالدوال",
-        "لا يوجد فرق بينهما"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الـ Destructuring في JavaScript؟",
-    answers: [
-        "طريقة لاستخراج البيانات من الكائنات أو المصفوفات",
-        "طريقة لتدمير الكائنات أو المصفوفات",
-        "طريقة لإنشاء كائنات أو مصفوفات جديدة"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الفرق بين let و var و const في JavaScript؟",
-    answers: [
-        "let و const تُعرفان بblock-scoped، بينما var تُعرف بfunction-scoped",
-        "var و const تُعرفان بblock-scoped، بينما let تُعرف بfunction-scoped",
-        "let و var تُعرفان بblock-scoped، بينما const تُعرف بfunction-scoped"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الـ Spread Operator في JavaScript؟",
-    answers: [
-        "يعمل على نسخ عناصر من كائن أو مصفوفة إلى كائن أو مصفوفة أخرى",
-        "يعمل على حذف عناصر من كائن أو مصفوفة",
-        "يعمل على إضافة عناصر إلى كائن أو مصفوفة"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الـ Rest Parameter في JavaScript؟",
-    answers: [
-        "يسمح بتمرير عدد غير محدد من الوسائط إلى دالة",
-        "يسمح بحذف الوسائط من دالة",
-        "يسمح بتغيير ترتيب الوسائط في دالة"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الـ Proxy في JavaScript؟",
-    answers: [
-        "يسمح لك بإنشاء كائنات مخصصة للتحكم في الوصول إلى الكائنات الأخرى",
-        "يسمح لك بحذف الكائنات",
-        "يسمح لك بإنشاء كائنات جديدة"
-    ],
-    correct: 0,
-    difficulty: "hard"
-},
-{
-    question: "ما هو الـ Reflect في JavaScript؟",
-    answers: [
-        "يوفر طرقًا للوصول إلى الخصائص الداخلية للكائنات",
-        "يوفر طرقًا لحذف الخصائص من الكائنات",
-        "يوفر طرقًا لإنشاء كائنات جديدة"
-    ],
-    correct: 0,
-    difficulty: "hard"
+        difficulty: "easy",
+        category: CATEGORIES.BASICS,
+        explanation: "let يتميز بنطاق Block scope مما يجعله أكثر أماناً وقابلية للتنبؤ.",
+        codeExample: `if (true) {
+    let x = 1;
+    var y = 2;
 }
+// console.log(x); // خطأ: x غير معرف
+console.log(y); // يعمل: 2`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Statements/let"
+    },
+    // فئة المصفوفات - سهل
+    {
+        question: "كيف تضيف عنصراً إلى نهاية مصفوفة؟",
+        answers: ["array.push()", "array.add()", "array.append()"],
+        correct: 0,
+        difficulty: "easy",
+        category: CATEGORIES.ARRAYS,
+        explanation: "دالة push() تضيف عنصراً أو أكثر إلى نهاية المصفوفة وتعيد الطول الجديد.",
+        codeExample: `const fruits = ['تفاح', 'موز'];
+fruits.push('برتقال');
+console.log(fruits); // ['تفاح', 'موز', 'برتقال']`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Global_Objects/Array/push"
+    },
+    // فئة الدوال - متوسط
+    {
+        question: "ما هي الدالة السهمية (Arrow Function)؟",
+        answers: [
+            "دالة تحتوي على سهم في اسمها",
+            "اختصار لكتابة الدوال العادية",
+            "دالة تعمل فقط مع المصفوفات"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.FUNCTIONS,
+        explanation: "الدوال السهمية هي طريقة مختصرة لكتابة الدوال في ES6، وتتميز بسلوك مختلف لـ this.",
+        codeExample: `// دالة عادية
+function add(a, b) {
+    return a + b;
+}
+
+// دالة سهمية مكافئة
+const add = (a, b) => a + b;`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Functions/Arrow_functions"
+    },
+    // فئة الكائنات - متوسط
+    {
+        question: "ما هو Destructuring في JavaScript؟",
+        answers: [
+            "تدمير الكائنات",
+            "استخراج قيم من الكائنات والمصفوفات",
+            "إنشاء نسخة من الكائن"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.OBJECTS,
+        explanation: "Destructuring هو تعبير يسمح باستخراج قيم من الكائنات أو المصفوفات وتعيينها لمتغيرات.",
+        codeExample: `const user = { name: 'علي', age: 25 };
+const { name, age } = user;
+console.log(name); // 'علي'
+
+const numbers = [1, 2, 3];
+const [first, second] = numbers;
+console.log(first); // 1`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+    },
+    // فئة DOM - متوسط
+    {
+        question: "ما هو Event Delegation؟",
+        answers: [
+            "تأخير تنفيذ الحدث",
+            "تفويض معالجة الأحداث للعنصر الأب",
+            "إلغاء الحدث"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.DOM,
+        explanation: "Event Delegation هو نمط برمجي يسمح بمعالجة الأحداث في العنصر الأب بدلاً من إضافة مستمعات لكل عنصر ابن.",
+        codeExample: `// بدون Event Delegation
+buttons.forEach(button => {
+    button.addEventListener('click', handleClick);
+});
+
+// مع Event Delegation
+container.addEventListener('click', e => {
+    if (e.target.matches('button')) {
+        handleClick(e);
+    }
+});`,
+        learnMoreUrl: "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_delegation"
+    },
+    // فئة البرمجة غير المتزامنة - صعب
+    {
+        question: "ما هو الفرق بين Promise و async/await؟",
+        answers: [
+            "لا يوجد فرق",
+            "async/await هو تحسين نحوي للتعامل مع Promises",
+            "Promise أحدث من async/await"
+        ],
+        correct: 1,
+        difficulty: "hard",
+        category: CATEGORIES.ASYNC,
+        explanation: "async/await هو تحسين نحوي يجعل التعامل مع Promises أسهل وأكثر وضوحاً، لكنه يعمل على نفس المبدأ.",
+        codeExample: `// باستخدام Promise
+fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+// باستخدام async/await
+async function getData() {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Statements/async_function"
+    },
+    // المزيد من أسئلة الأساسيات
+    {
+        question: "ما هو الفرق بين null و undefined في JavaScript؟",
+        answers: [
+            "لا يوجد فرق",
+            "undefined تعني أن المتغير غير معرف، null تعني أن المتغير فارغ عمداً",
+            "null تعني أن المتغير غير معرف، undefined تعني أن المتغير فارغ"
+        ],
+        correct: 1,
+        difficulty: "easy",
+        category: CATEGORIES.BASICS,
+        explanation: "undefined يشير إلى متغير تم تعريفه ولكن لم يتم تعيين قيمة له، بينما null هي قيمة يتم تعيينها عمداً لتشير إلى عدم وجود قيمة.",
+        codeExample: `let x;
+console.log(x); // undefined
+
+let y = null;
+console.log(y); // null
+
+console.log(typeof undefined); // 'undefined'
+console.log(typeof null); // 'object' (هذا خطأ تاريخي في JavaScript)`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Global_Objects/null"
+    },
+    // المزيد من أسئلة المصفوفات
+    {
+        question: "ما هي طريقة filter في المصفوفات؟",
+        answers: [
+            "تقوم بتغيير كل عناصر المصفوفة",
+            "تقوم بإنشاء مصفوفة جديدة تحتوي على العناصر التي تحقق شرطاً معيناً",
+            "تقوم بحذف العناصر من المصفوفة"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.ARRAYS,
+        explanation: "طريقة filter() تنشئ مصفوفة جديدة تحتوي فقط على العناصر التي تجتاز اختبار دالة معينة.",
+        codeExample: `const numbers = [1, 2, 3, 4, 5, 6];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+console.log(evenNumbers); // [2, 4, 6]
+
+const users = [
+    { name: 'علي', age: 25 },
+    { name: 'محمد', age: 17 },
+    { name: 'أحمد', age: 30 }
 ];
+const adults = users.filter(user => user.age >= 18);`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Global_Objects/Array/filter"
+    },
+    // المزيد من أسئلة ES6
+    {
+        question: "ما هو Template Literal في JavaScript؟",
+        answers: [
+            "نوع جديد من المصفوفات",
+            "طريقة لكتابة النصوص باستخدام `` مع إمكانية تضمين متغيرات",
+            "دالة لتنسيق النصوص"
+        ],
+        correct: 1,
+        difficulty: "easy",
+        category: CATEGORIES.ES6,
+        explanation: "Template Literals تسمح بكتابة النصوص باستخدام علامات `` وتضمين متغيرات وتعبيرات JavaScript باستخدام ${}.",
+        codeExample: `const name = 'أحمد';
+const age = 25;
+
+// الطريقة التقليدية
+console.log('اسمي ' + name + ' وعمري ' + age);
+
+// باستخدام Template Literals
+console.log(\`اسمي \${name} وعمري \${age}\`);
+
+// يمكن أيضاً كتابة نصوص متعددة الأسطر
+const html = \`
+    <div>
+        <h1>\${name}</h1>
+        <p>\${age}</p>
+    </div>
+\`;`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Template_literals"
+    },
+    // المزيد من أسئلة DOM
+    {
+        question: "ما هو الفرق بين innerHTML و textContent؟",
+        answers: [
+            "لا يوجد فرق بينهما",
+            "innerHTML يتعامل مع HTML، textContent يتعامل مع النص فقط",
+            "textContent أسرع دائماً"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.DOM,
+        explanation: "innerHTML يقوم بتفسير النص كـ HTML ويمكنه إضافة عناصر HTML، بينما textContent يتعامل مع النص فقط وأكثر أماناً ضد هجمات XSS.",
+        codeExample: `const div = document.querySelector('div');
+
+// باستخدام innerHTML
+div.innerHTML = '<strong>مرحباً</strong>'; // يظهر النص بخط عريض
+
+// باستخدام textContent
+div.textContent = '<strong>مرحباً</strong>'; // يظهر النص كما هو مع العلامات`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/API/Node/textContent"
+    },
+    // المزيد من أسئلة الدوال
+    {
+        question: "ما هي الدالة المجهولة (Anonymous Function)؟",
+        answers: [
+            "دالة بدون اسم",
+            "دالة لا يمكن استدعاؤها",
+            "دالة تعمل مرة واحدة فقط"
+        ],
+        correct: 0,
+        difficulty: "medium",
+        category: CATEGORIES.FUNCTIONS,
+        explanation: "الدالة المجهولة هي دالة بدون اسم، غالباً ما تستخدم كوسيط لدوال أخرى أو في التعبيرات الفورية.",
+        codeExample: `// دالة مجهولة كمعالج حدث
+button.addEventListener('click', function() {
+    console.log('تم النقر على الزر');
+});
+
+// دالة مجهولة مع arrow function
+const numbers = [1, 2, 3];
+const doubled = numbers.map(num => num * 2);
+
+// التعبير الفوري للدالة المجهولة (IIFE)
+(function() {
+    console.log('تم التنفيذ فوراً');
+})();`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Functions"
+    },
+    // المزيد من أسئلة الكائنات
+    {
+        question: "ما هو Object.freeze() في JavaScript؟",
+        answers: [
+            "دالة لحذف الكائن",
+            "دالة لمنع أي تعديلات على الكائن",
+            "دالة لنسخ الكائن"
+        ],
+        correct: 1,
+        difficulty: "hard",
+        category: CATEGORIES.OBJECTS,
+        explanation: "Object.freeze() يجعل الكائن غير قابل للتعديل: لا يمكن إضافة أو حذف أو تعديل خصائصه.",
+        codeExample: `const user = {
+    name: 'أحمد',
+    age: 25
+};
+
+Object.freeze(user);
+
+// لن تعمل هذه التعديلات
+user.name = 'محمد';     // لن يتغير
+user.email = 'test@example.com';  // لن تضاف
+delete user.age;        // لن يحذف
+
+console.log(user); // { name: 'أحمد', age: 25 }`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"
+    },
+    // المزيد من أسئلة البرمجة غير المتزامنة
+    {
+        question: "ما هو Promise.all()؟",
+        answers: [
+            "دالة تنتظر اكتمال جميع الوعود",
+            "دالة تنتظر اكتمال أول وعد",
+            "دالة لإلغاء جميع الوعود"
+        ],
+        correct: 0,
+        difficulty: "hard",
+        category: CATEGORIES.ASYNC,
+        explanation: "Promise.all() تأخذ مصفوفة من الوعود وتعيد وعداً جديداً يكتمل عندما تكتمل جميع الوعود أو يفشل إذا فشل أي منها.",
+        codeExample: `// مثال لتحميل بيانات متعددة
+const promises = [
+    fetch('/api/users'),
+    fetch('/api/posts'),
+    fetch('/api/comments')
+];
+
+try {
+    const [users, posts, comments] = await Promise.all(promises);
+    console.log('تم تحميل جميع البيانات');
+} catch (error) {
+    console.error('فشل في تحميل البيانات:', error);
+}`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Global_Objects/Promise/all"
+    },
+    // تحديث أسئلة DOM مع أمثلة تفاعلية
+    {
+        question: "كيف تنشئ عنصر DOM جديد وتضيفه للصفحة؟",
+        answers: [
+            "باستخدام innerHTML فقط",
+            "باستخدام createElement و appendChild",
+            "باستخدام insertHTML"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.DOM,
+        explanation: "إنشاء عناصر DOM يتم باستخدام createElement، ثم إضافتها للصفحة باستخدام appendChild أو أي طريقة إدراج أخرى.",
+        codeExample: `// إنشاء بطاقة تفاعلية
+function createCard(title, content) {
+    const card = document.createElement('div');
+    card.className = 'card p-4 bg-white shadow-lg rounded-lg';
+    
+    const titleEl = document.createElement('h3');
+    titleEl.className = 'text-xl font-bold mb-2';
+    titleEl.textContent = title;
+    
+    const contentEl = document.createElement('p');
+    contentEl.textContent = content;
+    
+    const likeBtn = document.createElement('button');
+    likeBtn.className = 'mt-2 px-4 py-2 bg-blue-500 text-white rounded';
+    likeBtn.textContent = 'أعجبني';
+    
+    let likes = 0;
+    likeBtn.onclick = () => {
+        likes++;
+        likeBtn.textContent = \`أعجبني (\${likes})\`;
+    };
+    
+    card.append(titleEl, contentEl, likeBtn);
+    document.body.appendChild(card);
+}
+
+// استخدام الدالة
+createCard('عنوان البطاقة', 'محتوى البطاقة التجريبي');`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/API/Document/createElement"
+    },
+    // تحديث أسئلة المصفوفات مع مثال تفاعلي
+    {
+        question: "كيف تستخدم طريقة map مع المصفوفات؟",
+        answers: [
+            "لتصفية العناصر",
+            "لتحويل كل عنصر إلى شكل جديد",
+            "لترتيب العناصر"
+        ],
+        correct: 1,
+        difficulty: "medium",
+        category: CATEGORIES.ARRAYS,
+        explanation: "طريقة map تنشئ مصفوفة جديدة بنفس الطول، حيث يتم تحويل كل عنصر حسب الدالة المعطاة.",
+        codeExample: `// مثال تفاعلي لتحويل درجات الحرارة
+const celsius = [0, 10, 20, 30, 40];
+
+// تحويل من سيليزيوس إلى فهرنهايت
+function celsiusToFahrenheit(c) {
+    return (c * 9/5) + 32;
+}
+
+const fahrenheit = celsius.map(celsiusToFahrenheit);
+
+// إنشاء جدول درجات الحرارة
+function createTemperatureTable() {
+    const table = document.createElement('table');
+    table.className = 'w-full border-collapse border';
+    
+    // إضافة الرأس
+    const thead = table.createTHead();
+    const headerRow = thead.insertRow();
+    ['سيليزيوس', 'فهرنهايت'].forEach(text => {
+        const th = document.createElement('th');
+        th.className = 'border p-2 bg-gray-100';
+        th.textContent = text;
+        headerRow.appendChild(th);
+    });
+    
+    // إضافة البيانات
+    celsius.forEach((c, i) => {
+        const row = table.insertRow();
+        const cell1 = row.insertCell();
+        const cell2 = row.insertCell();
+        
+        cell1.className = 'border p-2 text-center';
+        cell2.className = 'border p-2 text-center';
+        
+        cell1.textContent = \`\${c}°C\`;
+        cell2.textContent = \`\${fahrenheit[i].toFixed(1)}°F\`;
+    });
+    
+    return table;
+}`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+    },
+    // تحديث أسئلة ES6 مع مثال تفاعلي
+    {
+        question: "كيف تستخدم Destructuring مع الكائنات والمصفوفات؟",
+        answers: [
+            "فقط مع المصفوفات",
+            "فقط مع الكائنات",
+            "مع كل من الكائنات والمصفوفات"
+        ],
+        correct: 2,
+        difficulty: "medium",
+        category: CATEGORIES.ES6,
+        explanation: "Destructuring هو أسلوب ES6 يسمح باستخراج قيم من الكائنات والمصفوفات بطريقة مختصرة وأنيقة.",
+        codeExample: `// مثال تفاعلي لإدارة ملف شخصي
+class Profile {
+    constructor(data) {
+        this.data = data;
+    }
+    
+    // استخدام Destructuring في معالجة البيانات
+    displayProfile() {
+        const { name, age, skills = [] } = this.data;
+        const [primarySkill = 'لا يوجد', ...otherSkills] = skills;
+        
+        const container = document.createElement('div');
+        container.className = 'profile-card p-4 bg-white shadow rounded';
+        
+        container.innerHTML = \`
+            <h2 class="text-xl font-bold">\${name}</h2>
+            <p class="text-gray-600">العمر: \${age}</p>
+            <div class="skills mt-3">
+                <h3 class="font-bold">المهارات:</h3>
+                <p>المهارة الرئيسية: \${primarySkill}</p>
+                <p>المهارات الأخرى: \${otherSkills.join(', ') || 'لا يوجد'}</p>
+            </div>
+            <button class="edit-btn mt-2 px-4 py-2 bg-blue-500 text-white rounded">
+                تعديل
+            </button>
+        \`;
+        
+        // إضافة تفاعلية
+        const editBtn = container.querySelector('.edit-btn');
+        editBtn.onclick = () => {
+            const newSkill = prompt('أضف مهارة جديدة:');
+            if (newSkill) {
+                this.data.skills = [...(this.data.skills || []), newSkill];
+                container.replaceWith(this.displayProfile());
+            }
+        };
+        
+        return container;
+    }
+}
+
+// مثال للاستخدام
+const userData = {
+    name: 'أحمد',
+    age: 25,
+    skills: ['JavaScript', 'React', 'Node.js']
+};
+
+const profile = new Profile(userData);
+// profile.displayProfile() // لإضافة العنصر للصفحة`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+    }
+];
+
+// ===================== دالة لاختيار أسئلة عشوائية حسب المستوى والفئة =====================
+function selectRandomQuestions(difficulty, category = null, count = 5) {
+    let filteredQuestions = questions.filter(q => q.difficulty === difficulty);
+    
+    if (category) {
+        filteredQuestions = filteredQuestions.filter(q => q.category === category);
+    }
+    
+    // خلط الأسئلة
+    const shuffled = [...filteredQuestions].sort(() => Math.random() - 0.5);
+    
+    // إرجاع العدد المطلوب من الأسئلة
+    return shuffled.slice(0, Math.min(count, shuffled.length));
+}
 
 // ===================== وظائف اللعبة الأساسية =====================
 function startGame(difficulty) {
     gameState.reset();
     gameState.difficulty = difficulty;
-    gameState.activeQuestions = questions.filter(q => q.difficulty === difficulty);
     
-    UI.updateScore(0);
-    updateProgress();
+    // اختيار أسئلة عشوائية من كل الفئات
+    gameState.activeQuestions = selectRandomQuestions(difficulty);
+    
+    UI.welcomeScreen.classList.add('hidden');
+    UI.gameInfo.classList.remove('hidden');
     loadQuestion();
-    
-    // إضافة تأثير بداية اللعبة
-    UI.fadeIn(UI.gameInfo);
 }
 
 function loadQuestion() {

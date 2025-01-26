@@ -317,6 +317,43 @@ h1 {
     color: #f44336;
 }
 
+/* Explanation Section Styles */
+.explanation-section {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.explanation-section:not(.hidden) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#code-example-container {
+    font-family: 'Courier New', monospace;
+    direction: ltr;
+    text-align: left;
+}
+
+#code-example {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#learn-more-link {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#learn-more-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-5px); }

@@ -34,6 +34,30 @@
                 </button>
             </div>
 
+            <div id="levels" class="levels hidden">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">اختر المستوى:</h2>
+                    <div class="flex gap-2 justify-center">
+                        <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-green-500 text-white" data-level="easy">سهل</button>
+                        <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-yellow-500 text-white" data-level="medium">متوسط</button>
+                        <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-red-500 text-white" data-level="hard">صعب</button>
+                    </div>
+                </div>
+                
+                <div class="categories mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">اختر الفئة (اختياري):</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2" id="categories-container">
+                        <!-- سيتم ملء هذا القسم ديناميكياً بواسطة JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="start-game-btn" class="btn py-3 px-8 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-lg">
+                        ابدأ اللعب
+                    </button>
+                </div>
+            </div>
+
             <div id="game-info" class="game-info flex justify-between mb-6 hidden">
                 <div id="score" class="score text-lg text-gray-800 font-bold">النقاط: 0</div>
             </div>
@@ -44,13 +68,28 @@
 
             <div id="question" class="question text-lg text-gray-800 mb-6 text-center leading-relaxed">...</div>
             <div id="answers" class="answers flex flex-col gap-2 mb-6"></div>
+            
+            <!-- إضافة قسم الشرح والأمثلة -->
+            <div id="explanation-section" class="explanation-section hidden">
+                <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                    <h3 class="text-lg font-bold text-blue-800 mb-2">شرح الإجابة:</h3>
+                    <p id="explanation-text" class="text-blue-700 mb-4"></p>
+                    
+                    <div id="code-example-container" class="bg-gray-800 text-white p-4 rounded-lg mb-4 overflow-x-auto">
+                        <pre><code id="code-example" class="text-sm"></code></pre>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a id="learn-more-link" href="#" target="_blank" 
+                           class="inline-block bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300">
+                            تعلم المزيد
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <button id="next-btn" class="btn py-2 px-4 bg-blue-500 text-white rounded hidden mx-auto hover:bg-blue-600 transition-all duration-300">السؤال التالي</button>
 
-            <div id="levels" class="levels flex gap-2 justify-center mt-4 hidden">
-                <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-green-500 text-white" data-level="easy">سهل</button>
-                <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-yellow-500 text-white" data-level="medium">متوسط</button>
-                <button class="level-btn py-2 px-4 rounded cursor-pointer text-sm transition-all duration-300 bg-red-500 text-white" data-level="hard">صعب</button>
-            </div>
         </div>
     </div>
     <script src="js/main.js"></script>
