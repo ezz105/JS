@@ -585,6 +585,85 @@ const userData = {
 const profile = new Profile(userData);
 // profile.displayProfile() // لإضافة العنصر للصفحة`,
         learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment"
+    },
+    {
+        question: "ما الخطأ في هذا الكود؟\nlet x = 5;\nconsole.log(X);",
+        answers: [
+            "استخدام X بحرف كبير بدلاً من x",
+            "عدم تعريف المتغير",
+            "لا يوجد خطأ"
+        ],
+        correct: 0,
+        difficulty: "medium",
+        category: CATEGORIES.BASICS,
+        explanation: "JavaScript لغة حساسة لحالة الأحرف (case-sensitive)، المتغير X غير معرف",
+        codeExample: `// الحل الصحيح
+    let x = 5;
+    console.log(x);`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Guide/Grammar_and_types"
+    },
+    {
+        question: "لماذا يفشل هذا الكود؟\nconst arr = [1,2,3];\narr = [4,5,6];",
+        answers: [
+            "إعادة تعيين مصفوفة جديدة لـ const",
+            "استخدام طريقة خاطئة لتعديل المصفوفة",
+            "لا يوجد خطأ"
+        ],
+        correct: 0,
+        difficulty: "medium",
+        category: CATEGORIES.ARRAYS,
+        explanation: "لا يمكن إعادة تعيين قيمة المتغير المعرّف بـ const",
+        codeExample: `// الحل الصحيح
+    let arr = [1,2,3];
+    arr = [4,5,6];
+    
+    // أو استخدام push
+    const arr = [1,2,3];
+    arr.push(4);`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/JavaScript/Reference/Statements/const"
+    },
+    {
+        question: "كيف تنشئ نظام تصويت تفاعلي باستخدام الـ DOM؟",
+        answers: [
+            "باستخدام innerHTML فقط",
+            "بدمج createElement مع معالجات الأحداث",
+            "باستخدام مكتبات خارجية"
+        ],
+        correct: 1,
+        difficulty: "hard",
+        category: CATEGORIES.DOM,
+        explanation: "الطريقة الأفضل هي إنشاء العناصر ديناميكياً مع إضافة معالجات الأحداث",
+        codeExample: `function createVotingSystem(items) {
+        const container = document.createElement('div');
+        
+        items.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'flex items-center gap-2 mb-2';
+            
+            const button = document.createElement('button');
+            button.textContent = 'صوّت';
+            button.className = 'px-3 py-1 bg-green-500 text-white rounded';
+            
+            const countSpan = document.createElement('span');
+            countSpan.textContent = '0 أصوات';
+            
+            button.onclick = () => {
+                const currentCount = parseInt(countSpan.textContent) + 1;
+                countSpan.textContent = \`\${currentCount} أصوات\`;
+                button.disabled = true;
+            };
+            
+            div.append(\`\${item}: \`, countSpan, button);
+            container.appendChild(div);
+        });
+        
+        return container;
+    }
+    
+    // الاستخدام:
+    const votingSystem = createVotingSystem(['الخيار 1', 'الخيار 2', 'الخيار 3']);
+    document.body.appendChild(votingSystem);`,
+        learnMoreUrl: "https://developer.mozilla.org/ar/docs/Web/API/Document/createElement"
     }
 ];
 
@@ -604,16 +683,43 @@ function selectRandomQuestions(difficulty, category = null, count = 5) {
 }
 
 // ===================== وظائف اللعبة الأساسية =====================
-function startGame(difficulty) {
+function startGame(initialDifficulty) {
     gameState.reset();
-    gameState.difficulty = difficulty;
+    gameState.difficulty = initialDifficulty;
     
-    // اختيار أسئلة عشوائية من كل الفئات
-    gameState.activeQuestions = selectRandomQuestions(difficulty);
-    
+    // توليد أسئلة تكيفية
+    gameState.activeQuestions = generateAdaptiveQuestions(initialDifficulty);
+
     UI.welcomeScreen.classList.add('hidden');
     UI.gameInfo.classList.remove('hidden');
     loadQuestion();
+}
+
+
+function generateAdaptiveQuestions(initialDifficulty) {
+    let questionsPool = [];
+    let difficultyLevels = ['easy', 'medium', 'hard'];
+    
+    // إضافة أسئلة حسب الأداء
+    if(initialDifficulty === 'easy') {
+        questionsPool = [
+            ...selectRandomQuestions('easy', null, 3),
+            ...selectRandomQuestions('medium', null, 2)
+        ];
+    } else if(initialDifficulty === 'medium') {
+        questionsPool = [
+            ...selectRandomQuestions('easy', null, 1),
+            ...selectRandomQuestions('medium', null, 3),
+            ...selectRandomQuestions('hard', null, 1)
+        ];
+    } else {
+        questionsPool = [
+            ...selectRandomQuestions('medium', null, 2),
+            ...selectRandomQuestions('hard', null, 3)
+        ];
+    }
+    
+    return questionsPool.sort(() => Math.random() - 0.5);
 }
 
 function loadQuestion() {
@@ -664,8 +770,17 @@ function checkAnswer(selectedIndex) {
 
 // ===================== وظائف التوقيت والتقدم =====================
 function updateProgress() {
-    const progress = ((gameState.currentQuestion + 1) / gameState.activeQuestions.length) * 100;
     const progressElement = document.getElementById('progress');
+    const percentage = ((gameState.currentQuestion + 1) / gameState.activeQuestions.length) * 100;
+    
+    // إضافة مؤشرات لونية حسب الأداء
+    if(percentage < 33) {
+        progressElement.style.backgroundColor = '#ef4444';
+    } else if(percentage < 66) {
+        progressElement.style.backgroundColor = '#f59e0b';
+    } else {
+        progressElement.style.backgroundColor = '#10b981';
+    }
     
     // إضافة تأثير حركي لشريط التقدم
     progressElement.style.transition = 'width 0.5s ease';
@@ -704,6 +819,8 @@ function checkAchievements() {
         hard: 0
     };
 
+    
+
     gameState.activeQuestions.forEach((q, index) => {
         if (gameState.score > index * 10) {
             levelScores[q.difficulty]++;
@@ -725,6 +842,8 @@ function checkAchievements() {
     if (Object.values(levelScores).some(score => score === questions.filter(q => q.difficulty === gameState.difficulty).length)) {
         achievements.perfect.unlocked = true;
     }
+    
+    
 }
 
 // ===================== اقتراحات للتحسين =====================
